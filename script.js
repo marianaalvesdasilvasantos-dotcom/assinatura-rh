@@ -5,9 +5,6 @@
 // URL do Google Apps Script
 const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzUEa8JrXHwN-LuE_XuqVS9dP8vyVK-mQFRTHS-JH8RT3iSPlEJci7RftTpIfqCrTN-/exec";
 
-// Nome do documento/formulário
-const DOCUMENTO = "Troca de Plantão";
-
 
 // ==============================
 // CANVAS
@@ -94,9 +91,18 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
     limparMensagem();
 
-    const matricula = document.getElementById("matricula").value.trim();
+    // ==============================
+    // PEGAR DADOS DO FORMULÁRIO
+    // ==============================
 
-    const aceite = document.getElementById("aceite").checked;
+    const matricula =
+        document.getElementById("matricula").value.trim();
+
+    const tipoDocumento =
+        document.getElementById("tipoDocumento").value;
+
+    const aceite =
+        document.getElementById("aceite").checked;
 
 
     // ==============================
@@ -107,6 +113,22 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
         mostrarMensagem(
             "⚠️ Informe sua matrícula.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    // ==============================
+    // VALIDAÇÃO DO TIPO DE DOCUMENTO
+    // ==============================
+
+    if (tipoDocumento === "") {
+
+        mostrarMensagem(
+            "⚠️ Selecione o tipo de documento.",
             "erro"
         );
 
@@ -151,7 +173,8 @@ document.getElementById("enviar").addEventListener("click", async () => {
     // CONVERTER ASSINATURA
     // ==============================
 
-    const assinatura = signaturePad.toDataURL("image/png");
+    const assinatura =
+        signaturePad.toDataURL("image/png");
 
 
     // ==============================
@@ -162,9 +185,9 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
         matricula: matricula,
 
-        assinatura: assinatura,
+        tipoDocumento: tipoDocumento,
 
-        documento: DOCUMENTO
+        assinatura: assinatura
 
     };
 
@@ -199,7 +222,13 @@ document.getElementById("enviar").addEventListener("click", async () => {
             );
 
 
+            // ==============================
+            // LIMPAR FORMULÁRIO
+            // ==============================
+
             document.getElementById("matricula").value = "";
+
+            document.getElementById("tipoDocumento").value = "";
 
             document.getElementById("aceite").checked = false;
 
@@ -208,7 +237,6 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
         } else {
 
-
             // ==============================
             // ERRO RETORNADO PELO SERVIDOR
             // ==============================
@@ -216,8 +244,10 @@ document.getElementById("enviar").addEventListener("click", async () => {
             mostrarMensagem(
 
                 "❌ " +
-                (resultado.mensagem ||
-                "O servidor retornou um erro."),
+                (
+                    resultado.mensagem ||
+                    "O servidor retornou um erro."
+                ),
 
                 "erro"
 
@@ -227,7 +257,6 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
 
     } catch (erro) {
-
 
         // ==============================
         // ERRO DE CONEXÃO
