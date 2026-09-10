@@ -18,6 +18,8 @@
 
         <h2>Assinatura Digital</h2>
 
+        <!-- MATRÍCULA -->
+
         <label for="matricula">Matrícula</label>
 
         <input
@@ -27,13 +29,41 @@
 
         <br><br>
 
+        <!-- TIPO DE DOCUMENTO -->
+
+        <label for="tipoDocumento">Tipo de documento</label>
+
+        <select id="tipoDocumento">
+
+            <option value="">
+                Selecione o documento
+            </option>
+
+            <option value="Vale Transporte">
+                Vale Transporte
+            </option>
+
+            <option value="Plantão Extra">
+                Plantão Extra
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <!-- ASSINATURA -->
+
         <label for="assinatura">Assine abaixo</label>
 
         <canvas id="assinatura"></canvas>
 
+        <!-- DECLARAÇÃO -->
+
         <div class="declaracao">
 
-            <input type="checkbox" id="aceite">
+            <input
+                type="checkbox"
+                id="aceite">
 
             <label for="aceite">
                 Declaro que esta assinatura é de minha autoria e que as informações enviadas são verdadeiras.
@@ -41,15 +71,23 @@
 
         </div>
 
+        <!-- MENSAGEM -->
+
         <div id="mensagem"></div>
+
+        <!-- BOTÕES -->
 
         <div class="botoes">
 
-            <button id="limpar" type="button">
+            <button
+                id="limpar"
+                type="button">
                 Limpar
             </button>
 
-            <button id="enviar" type="button">
+            <button
+                id="enviar"
+                type="button">
                 Enviar
             </button>
 
@@ -57,7 +95,11 @@
 
     </div>
 
+    <!-- BIBLIOTECA DE ASSINATURA -->
+
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <!-- NOSSO JAVASCRIPT -->
 
     <script src="script.js"></script>
 
