@@ -207,7 +207,7 @@ label[for="assinatura"] {
     margin: 0;
 
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1;
     font-weight: 400;
 
     color: #465565;
@@ -226,7 +226,7 @@ label[for="assinatura"] {
     margin: 0 0 25px 0;
 
     font-size: 17px;
-    line-height: 1.5;
+    line-height: 1;
     text-align: center;
 }
 
