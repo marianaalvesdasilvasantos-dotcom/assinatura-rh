@@ -22,10 +22,10 @@ body {
 .container {
     width: 90%;
     max-width: 500px;
-    margin: 30px auto;
+    margin: 20px auto;
     background: white;
     border-radius: 12px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
 }
