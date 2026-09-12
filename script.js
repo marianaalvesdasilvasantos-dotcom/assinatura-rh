@@ -68,9 +68,10 @@ document.getElementById("limpar").addEventListener("click", () => {
 
     signaturePad.clear();
 
-    // Limpa também os campos
     document.getElementById("matricula").value = "";
+
     document.getElementById("tipoDocumento").value = "";
+
     document.getElementById("aceite").checked = false;
 
     limparMensagem();
@@ -86,58 +87,86 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
     limparMensagem();
 
-    const matricula = document.getElementById("matricula").value.trim();
+    const matricula =
+        document.getElementById("matricula").value.trim();
 
-    const tipoDocumento = document.getElementById("tipoDocumento").value;
+    const tipoDocumento =
+        document.getElementById("tipoDocumento").value;
 
-    const aceite = document.getElementById("aceite").checked;
+    const aceite =
+        document.getElementById("aceite").checked;
 
 
     // ==============================
-    // VALIDAÇÕES
+    // VALIDAR MATRÍCULA
     // ==============================
 
     if (matricula === "") {
 
-        mostrarMensagem("⚠️ Informe sua matrícula.", "erro");
+        mostrarMensagem(
+            "⚠️ Informe sua matrícula.",
+            "erro"
+        );
 
         return;
     }
 
+
+    // ==============================
+    // VALIDAR TIPO DE DOCUMENTO
+    // ==============================
 
     if (tipoDocumento === "") {
 
-        mostrarMensagem("⚠️ Selecione o tipo de documento.", "erro");
+        mostrarMensagem(
+            "⚠️ Selecione o tipo de documento.",
+            "erro"
+        );
 
         return;
     }
 
+
+    // ==============================
+    // VALIDAR ASSINATURA
+    // ==============================
 
     if (signaturePad.isEmpty()) {
 
-        mostrarMensagem("⚠️ Faça sua assinatura antes de enviar.", "erro");
+        mostrarMensagem(
+            "⚠️ Faça sua assinatura antes de enviar.",
+            "erro"
+        );
 
         return;
     }
 
+
+    // ==============================
+    // VALIDAR DECLARAÇÃO
+    // ==============================
 
     if (!aceite) {
 
-        mostrarMensagem("⚠️ Você precisa confirmar a declaração.", "erro");
+        mostrarMensagem(
+            "⚠️ Você precisa confirmar a declaração.",
+            "erro"
+        );
 
         return;
     }
 
 
     // ==============================
-    // PREPARAR ASSINATURA
+    // PEGAR ASSINATURA
     // ==============================
 
-    const assinatura = signaturePad.toDataURL("image/png");
+    const assinatura =
+        signaturePad.toDataURL("image/png");
 
 
     // ==============================
-    // DADOS ENVIADOS
+    // PREPARAR DADOS
     // ==============================
 
     const dados = {
@@ -166,11 +195,12 @@ document.getElementById("enviar").addEventListener("click", async () => {
         });
 
 
-        const resultado = await resposta.json();
+        const resultado =
+            await resposta.json();
 
 
         // ==============================
-        // RESPOSTA
+        // SUCESSO
         // ==============================
 
         if (resultado.status === "ok") {
