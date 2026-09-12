@@ -2,36 +2,56 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Assinatura RH</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <img src="logo.png" alt="Logo UPA Del Castilho" class="logo">
+        <img
+            src="logo.png"
+            alt="Logo UPA Del Castilho"
+            class="logo"
+        >
 
         <h2>Assinatura Digital</h2>
 
-        <!-- MATRÍCULA -->
 
-        <label for="matricula">Matrícula</label>
+        <!-- ==============================
+             MATRÍCULA
+        =============================== -->
+
+        <label for="matricula">
+            Matrícula
+        </label>
 
         <input
             type="text"
             id="matricula"
-            placeholder="Digite sua matrícula">
+            placeholder="Digite sua matrícula"
+            autocomplete="off"
+        >
 
-        <br><br>
 
-        <!-- TIPO DE DOCUMENTO -->
+        <!-- ==============================
+             TIPO DE DOCUMENTO
+        =============================== -->
 
-        <label for="tipoDocumento">Tipo de documento</label>
+        <label for="tipoDocumento">
+            Tipo de documento
+        </label>
 
         <select id="tipoDocumento">
 
@@ -49,45 +69,63 @@
 
         </select>
 
-        <br><br>
 
-        <!-- ASSINATURA -->
+        <!-- ==============================
+             ASSINATURA
+        =============================== -->
 
-        <label for="assinatura">Assine abaixo</label>
+        <label for="assinatura">
+            Assine abaixo
+        </label>
 
         <canvas id="assinatura"></canvas>
 
-        <!-- DECLARAÇÃO -->
+
+        <!-- ==============================
+             DECLARAÇÃO
+        =============================== -->
 
         <div class="declaracao">
 
             <input
                 type="checkbox"
-                id="aceite">
+                id="aceite"
+            >
 
             <label for="aceite">
-                Declaro que esta assinatura é de minha autoria e que as informações enviadas são verdadeiras.
+
+                Declaro que esta assinatura é de minha autoria
+                e que as informações enviadas são verdadeiras.
+
             </label>
 
         </div>
 
-        <!-- MENSAGEM -->
+
+        <!-- ==============================
+             MENSAGEM
+        =============================== -->
 
         <div id="mensagem"></div>
 
-        <!-- BOTÕES -->
+
+        <!-- ==============================
+             BOTÕES
+        =============================== -->
 
         <div class="botoes">
 
             <button
                 id="limpar"
-                type="button">
+                type="button"
+            >
                 Limpar
             </button>
 
             <button
                 id="enviar"
-                type="button">
+                type="button"
+            >
                 Enviar
             </button>
 
@@ -95,13 +133,20 @@
 
     </div>
 
-    <!-- BIBLIOTECA DE ASSINATURA -->
+
+    <!-- ==============================
+         SIGNATURE PAD
+    =============================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
-    <!-- NOSSO JAVASCRIPT -->
 
-    <script src="script.js"></script>
+    <!-- ==============================
+         NOSSO JAVASCRIPT
+         ?v=3 EVITA CACHE ANTIGO
+    =============================== -->
+
+    <script src="script.js?v=3"></script>
 
 </body>
 
