@@ -3,7 +3,7 @@
 // ==================================================
 
 const URL_SCRIPT =
-    "https://script.google.com/macros/s/AKfycbzUEa8JrXHwN-LuE_XuqVS9dP8vyVK-mQFRTHS-JH8RT3iSPlEJci7RftTpIfqCrTN-/exec";
+    https://script.google.com/macros/s/AKfycbxe5EG_58E8awnubPjTnr6lKCh8xzuf2PA28Cy2l_UacFyBmrk2KlhM9xt3e1-Tns70/exec
 
 
 // ==================================================
