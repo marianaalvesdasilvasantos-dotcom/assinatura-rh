@@ -7,7 +7,7 @@ const URL_SCRIPT =
 
 
 // ==================================================
-// ELEMENTOS DA PÁGINA
+// ELEMENTOS
 // ==================================================
 
 const canvas =
@@ -58,9 +58,12 @@ function ajustarCanvas(
         preservarAssinatura &&
         !signaturePad.isEmpty()
     ) {
+
         assinatura =
             signaturePad.toData();
+
     }
+
 
     const ratio =
         Math.max(
@@ -68,11 +71,13 @@ function ajustarCanvas(
             1
         );
 
+
     const largura =
         canvas.offsetWidth;
 
     const altura =
         canvas.offsetHeight;
+
 
     canvas.width =
         largura * ratio;
@@ -80,8 +85,10 @@ function ajustarCanvas(
     canvas.height =
         altura * ratio;
 
+
     const contexto =
         canvas.getContext("2d");
+
 
     contexto.setTransform(
         ratio,
@@ -91,6 +98,7 @@ function ajustarCanvas(
         0,
         0
     );
+
 
     if (assinatura) {
 
@@ -103,40 +111,54 @@ function ajustarCanvas(
         signaturePad.clear();
 
     }
+
 }
 
 
-// Ajuste inicial
 ajustarCanvas(false);
 
 
-// Ajustar quando a tela mudar
+// ==================================================
+// AJUSTAR CANVAS AO REDIMENSIONAR
+// ==================================================
+
 window.addEventListener(
     "resize",
     function() {
+
         ajustarCanvas(true);
+
     }
 );
 
 
 // ==================================================
-// TOUCH DO CELULAR
+// TOUCH
 // ==================================================
 
 canvas.addEventListener(
     "touchstart",
     function(event) {
+
         event.preventDefault();
+
     },
-    { passive: false }
+    {
+        passive: false
+    }
 );
+
 
 canvas.addEventListener(
     "touchmove",
     function(event) {
+
         event.preventDefault();
+
     },
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 
@@ -154,6 +176,7 @@ function mostrarMensagem(
 
     campoMensagem.className =
         tipo;
+
 }
 
 
@@ -164,6 +187,7 @@ function limparMensagem() {
 
     campoMensagem.className =
         "";
+
 }
 
 
@@ -195,7 +219,7 @@ botaoEnviar.addEventListener(
 
 
         // ==========================================
-        // PEGAR DADOS DO FORMULÁRIO
+        // PEGAR DADOS
         // ==========================================
 
         const matricula =
@@ -224,6 +248,7 @@ botaoEnviar.addEventListener(
             campoMatricula.focus();
 
             return;
+
         }
 
 
@@ -241,6 +266,7 @@ botaoEnviar.addEventListener(
             campoDocumento.focus();
 
             return;
+
         }
 
 
@@ -256,6 +282,7 @@ botaoEnviar.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -271,6 +298,7 @@ botaoEnviar.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -303,36 +331,17 @@ botaoEnviar.addEventListener(
 
 
         // ==========================================
-        // MOSTRAR NO CONSOLE
+        // CONFERÊNCIA
         // ==========================================
 
         console.log(
-            "================================="
-        );
-
-        console.log(
-            "DADOS ENVIADOS AO SERVIDOR:"
-        );
-
-        console.log(
             "Matrícula:",
-            dados.matricula
+            matricula
         );
 
         console.log(
             "Tipo de documento:",
-            dados.tipoDocumento
-        );
-
-        console.log(
-            "Assinatura:",
-            dados.assinatura
-                ? "SIM"
-                : "NÃO"
-        );
-
-        console.log(
-            "================================="
+            tipoDocumento
         );
 
 
@@ -348,84 +357,45 @@ botaoEnviar.addEventListener(
 
 
         // ==========================================
-        // ENVIAR
+        // ENVIAR PARA GOOGLE APPS SCRIPT
         // ==========================================
 
         try {
 
-            const resposta =
-                await fetch(
-                    URL_SCRIPT,
-                    {
-                        method: "POST",
-                        body: JSON.stringify(dados)
-                    }
-                );
-
-
-            // ======================================
-            // LER RESPOSTA
-            // ======================================
-
-            const resultado =
-                await resposta.json();
-
-
-            console.log(
-                "RESPOSTA DO SERVIDOR:"
-            );
-
-            console.log(
-                resultado
+            await fetch(
+                URL_SCRIPT,
+                {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: JSON.stringify(dados)
+                }
             );
 
 
             // ======================================
-            // SUCESSO
+            // ENVIO REALIZADO
             // ======================================
 
-            if (
-                resultado.status === "ok"
-            ) {
-
-                mostrarMensagem(
-                    "✅ Assinatura enviada com sucesso!",
-                    "sucesso"
-                );
+            mostrarMensagem(
+                "✅ Assinatura enviada com sucesso!",
+                "sucesso"
+            );
 
 
-                console.log(
-                    "Documento registrado:",
-                    resultado.documento
-                );
+            // ======================================
+            // LIMPAR FORMULÁRIO
+            // ======================================
 
+            campoMatricula.value =
+                "";
 
-                // Limpar formulário
+            campoDocumento.value =
+                "";
 
-                campoMatricula.value =
-                    "";
+            campoAceite.checked =
+                false;
 
-                campoDocumento.value =
-                    "";
-
-                campoAceite.checked =
-                    false;
-
-                signaturePad.clear();
-
-
-            } else {
-
-                mostrarMensagem(
-                    "❌ " +
-                    (
-                        resultado.mensagem ||
-                        "O servidor retornou um erro."
-                    ),
-                    "erro"
-                );
-
-            }
+            signaturePad.clear();
 
 
         } catch (erro) {
@@ -435,8 +405,9 @@ botaoEnviar.addEventListener(
                 erro
             );
 
+
             mostrarMensagem(
-                "❌ Erro ao conectar com o servidor.",
+                "❌ Não foi possível enviar a assinatura.",
                 "erro"
             );
 
