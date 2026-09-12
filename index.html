@@ -2,19 +2,29 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Assinatura RH</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <img src="logo.png" alt="Logo UPA Del Castilho" class="logo">
+        <img
+            src="logo.png"
+            alt="Logo UPA Del Castilho"
+            class="logo"
+        >
 
         <h2>Assinatura Digital</h2>
 
@@ -22,22 +32,60 @@
             Confirme sua matrícula e assine abaixo para validar as informações enviadas no formulário.
         </p>
 
-        <label for="matricula">Matrícula</label>
+
+        <!-- MATRÍCULA -->
+
+        <label for="matricula">
+            Matrícula
+        </label>
 
         <input
             type="text"
             id="matricula"
-            placeholder="Digite sua matrícula">
+            placeholder="Digite sua matrícula"
+        >
 
-        <br><br>
 
-        <label for="assinatura">Assine abaixo</label>
+        <!-- TIPO DE DOCUMENTO -->
+
+        <label for="tipoDocumento">
+            Tipo de Documento
+        </label>
+
+        <select id="tipoDocumento">
+
+            <option value="">
+                Selecione o tipo de documento
+            </option>
+
+            <option value="Plantão Extra">
+                Plantão Extra
+            </option>
+
+            <option value="Solicitação de Transporte">
+                Solicitação de Transporte
+            </option>
+
+        </select>
+
+
+        <!-- ASSINATURA -->
+
+        <label for="assinatura">
+            Assine abaixo
+        </label>
 
         <canvas id="assinatura"></canvas>
 
+
+        <!-- DECLARAÇÃO -->
+
         <div class="declaracao">
 
-            <input type="checkbox" id="aceite">
+            <input
+                type="checkbox"
+                id="aceite"
+            >
 
             <label for="aceite">
                 Declaro que esta assinatura é de minha autoria e que as informações enviadas são verdadeiras.
@@ -45,21 +93,34 @@
 
         </div>
 
+
+        <!-- MENSAGEM -->
+
         <div id="mensagem"></div>
+
+
+        <!-- BOTÕES -->
 
         <div class="botoes">
 
-            <button id="limpar" type="button">
+            <button
+                id="limpar"
+                type="button"
+            >
                 Limpar
             </button>
 
-            <button id="enviar" type="button">
+            <button
+                id="enviar"
+                type="button"
+            >
                 Enviar
             </button>
 
         </div>
 
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
