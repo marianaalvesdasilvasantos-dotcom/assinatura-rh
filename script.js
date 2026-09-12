@@ -3,7 +3,7 @@
 // ==================================================
 
 const URL_SCRIPT =
-    https://script.google.com/macros/s/AKfycbxe5EG_58E8awnubPjTnr6lKCh8xzuf2PA28Cy2l_UacFyBmrk2KlhM9xt3e1-Tns70/exec
+    "https://script.google.com/macros/s/AKfycbxe5EG_58E8awnubPjTnr6lKCh8xzuf2PA28Cy2l_UacFyBmrk2KlhM9xt3e1-Tns70/exec";
 
 
 // ==================================================
@@ -38,13 +38,9 @@ const campoMensagem =
 
 const signaturePad =
     new SignaturePad(canvas, {
-
         minWidth: 1,
-
         maxWidth: 2.5,
-
         penColor: "#000000"
-
     });
 
 
@@ -58,19 +54,13 @@ function ajustarCanvas(
 
     let assinatura = null;
 
-
-    // Guardar assinatura antes de redimensionar
-
     if (
         preservarAssinatura &&
         !signaturePad.isEmpty()
     ) {
-
         assinatura =
             signaturePad.toData();
-
     }
-
 
     const ratio =
         Math.max(
@@ -78,13 +68,11 @@ function ajustarCanvas(
             1
         );
 
-
     const largura =
         canvas.offsetWidth;
 
     const altura =
         canvas.offsetHeight;
-
 
     canvas.width =
         largura * ratio;
@@ -92,10 +80,8 @@ function ajustarCanvas(
     canvas.height =
         altura * ratio;
 
-
     const contexto =
         canvas.getContext("2d");
-
 
     contexto.setTransform(
         ratio,
@@ -105,9 +91,6 @@ function ajustarCanvas(
         0,
         0
     );
-
-
-    // Restaurar assinatura
 
     if (assinatura) {
 
@@ -120,54 +103,40 @@ function ajustarCanvas(
         signaturePad.clear();
 
     }
-
 }
 
 
 // Ajuste inicial
-
 ajustarCanvas(false);
 
 
-// Ajustar novamente quando a tela mudar
-
+// Ajustar quando a tela mudar
 window.addEventListener(
     "resize",
     function() {
-
         ajustarCanvas(true);
-
     }
 );
 
 
 // ==================================================
-// TOUCH NO CELULAR
+// TOUCH DO CELULAR
 // ==================================================
 
 canvas.addEventListener(
     "touchstart",
     function(event) {
-
         event.preventDefault();
-
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
-
 
 canvas.addEventListener(
     "touchmove",
     function(event) {
-
         event.preventDefault();
-
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
 
 
@@ -185,7 +154,6 @@ function mostrarMensagem(
 
     campoMensagem.className =
         tipo;
-
 }
 
 
@@ -196,7 +164,6 @@ function limparMensagem() {
 
     campoMensagem.className =
         "";
-
 }
 
 
@@ -228,31 +195,23 @@ botaoEnviar.addEventListener(
 
 
         // ==========================================
-        // PEGAR MATRÍCULA
+        // PEGAR DADOS DO FORMULÁRIO
         // ==========================================
 
         const matricula =
             campoMatricula.value.trim();
 
 
-        // ==========================================
-        // PEGAR DOCUMENTO
-        // ==========================================
-
         const tipoDocumento =
             campoDocumento.value.trim();
 
-
-        // ==========================================
-        // PEGAR ACEITE
-        // ==========================================
 
         const aceite =
             campoAceite.checked;
 
 
         // ==========================================
-        // VALIDAÇÃO DA MATRÍCULA
+        // VALIDAR MATRÍCULA
         // ==========================================
 
         if (!matricula) {
@@ -265,12 +224,11 @@ botaoEnviar.addEventListener(
             campoMatricula.focus();
 
             return;
-
         }
 
 
         // ==========================================
-        // VALIDAÇÃO DO DOCUMENTO
+        // VALIDAR DOCUMENTO
         // ==========================================
 
         if (!tipoDocumento) {
@@ -283,12 +241,11 @@ botaoEnviar.addEventListener(
             campoDocumento.focus();
 
             return;
-
         }
 
 
         // ==========================================
-        // VALIDAÇÃO DA ASSINATURA
+        // VALIDAR ASSINATURA
         // ==========================================
 
         if (signaturePad.isEmpty()) {
@@ -299,12 +256,11 @@ botaoEnviar.addEventListener(
             );
 
             return;
-
         }
 
 
         // ==========================================
-        // VALIDAÇÃO DO ACEITE
+        // VALIDAR ACEITE
         // ==========================================
 
         if (!aceite) {
@@ -315,7 +271,6 @@ botaoEnviar.addEventListener(
             );
 
             return;
-
         }
 
 
@@ -349,15 +304,14 @@ botaoEnviar.addEventListener(
 
         // ==========================================
         // MOSTRAR NO CONSOLE
-        // EXATAMENTE O QUE SERÁ ENVIADO
         // ==========================================
 
         console.log(
-            "DADOS ENVIADOS AO GOOGLE APPS SCRIPT:"
+            "================================="
         );
 
         console.log(
-            dados
+            "DADOS ENVIADOS AO SERVIDOR:"
         );
 
         console.log(
@@ -370,9 +324,20 @@ botaoEnviar.addEventListener(
             dados.tipoDocumento
         );
 
+        console.log(
+            "Assinatura:",
+            dados.assinatura
+                ? "SIM"
+                : "NÃO"
+        );
+
+        console.log(
+            "================================="
+        );
+
 
         // ==========================================
-        // DESABILITAR BOTÃO DURANTE ENVIO
+        // DESABILITAR BOTÃO
         // ==========================================
 
         botaoEnviar.disabled =
@@ -383,7 +348,7 @@ botaoEnviar.addEventListener(
 
 
         // ==========================================
-        // ENVIAR PARA GOOGLE APPS SCRIPT
+        // ENVIAR
         // ==========================================
 
         try {
@@ -392,12 +357,8 @@ botaoEnviar.addEventListener(
                 await fetch(
                     URL_SCRIPT,
                     {
-
                         method: "POST",
-
-                        body:
-                            JSON.stringify(dados)
-
+                        body: JSON.stringify(dados)
                     }
                 );
 
@@ -411,7 +372,7 @@ botaoEnviar.addEventListener(
 
 
             console.log(
-                "RESPOSTA DO GOOGLE APPS SCRIPT:"
+                "RESPOSTA DO SERVIDOR:"
             );
 
             console.log(
@@ -433,47 +394,35 @@ botaoEnviar.addEventListener(
                 );
 
 
-                // Limpar matrícula
+                console.log(
+                    "Documento registrado:",
+                    resultado.documento
+                );
+
+
+                // Limpar formulário
 
                 campoMatricula.value =
                     "";
 
-
-                // Limpar documento
-
                 campoDocumento.value =
                     "";
-
-
-                // Desmarcar aceite
 
                 campoAceite.checked =
                     false;
 
-
-                // Limpar assinatura
-
                 signaturePad.clear();
-
-
-                console.log(
-                    "Documento confirmado pelo servidor:",
-                    resultado.documento
-                );
 
 
             } else {
 
                 mostrarMensagem(
-
                     "❌ " +
                     (
                         resultado.mensagem ||
                         "O servidor retornou um erro."
                     ),
-
                     "erro"
-
                 );
 
             }
@@ -486,21 +435,13 @@ botaoEnviar.addEventListener(
                 erro
             );
 
-
             mostrarMensagem(
-
                 "❌ Erro ao conectar com o servidor.",
-
                 "erro"
-
             );
 
 
         } finally {
-
-            // ======================================
-            // REATIVAR BOTÃO
-            // ======================================
 
             botaoEnviar.disabled =
                 false;
