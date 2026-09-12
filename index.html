@@ -20,13 +20,23 @@
 
     <div class="container">
 
+        <!-- LOGO -->
+
         <img
             src="logo.png"
             alt="Logo UPA Del Castilho"
             class="logo"
         >
 
-        <h2>Assinatura Digital</h2>
+
+        <!-- TÍTULO -->
+
+        <h2>
+            Assinatura Digital
+        </h2>
+
+
+        <!-- DESCRIÇÃO -->
 
         <p class="descricao">
             Confirme sua matrícula e assine abaixo para validar as informações enviadas no formulário.
@@ -43,6 +53,7 @@
             type="text"
             id="matricula"
             placeholder="Digite sua matrícula"
+            autocomplete="off"
         >
 
 
@@ -52,9 +63,16 @@
             Tipo de Documento
         </label>
 
-        <select id="tipoDocumento">
+        <select
+            id="tipoDocumento"
+            required
+        >
 
-            <option value="" selected disabled>
+            <option
+                value=""
+                selected
+                disabled
+            >
                 Selecione o tipo de documento
             </option>
 
@@ -122,7 +140,12 @@
     </div>
 
 
+    <!-- BIBLIOTECA DE ASSINATURA -->
+
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+
+    <!-- JAVASCRIPT DO SISTEMA -->
 
     <script src="script.js"></script>
 
