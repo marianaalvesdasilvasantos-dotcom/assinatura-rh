@@ -3,7 +3,7 @@
 // ==============================
 
 // URL do Google Apps Script
-const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzUEa8JrXHwN-LuE_XuqVS9dP8vyVK-mQFRTHS-JH8RT3iSPlEJci7RftTpIfqCrTN-/exec";
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGvPIuZ-91og6ti_LP22d59zF_czAuuacMEWN0fC-naPc0wsQcNc6n8oRbtYmPpD-7/exec";
 
 // Canvas
 const canvas = document.getElementById("assinatura");
