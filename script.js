@@ -68,6 +68,11 @@ document.getElementById("limpar").addEventListener("click", () => {
 
     signaturePad.clear();
 
+    // Limpa também os campos
+    document.getElementById("matricula").value = "";
+    document.getElementById("tipoDocumento").value = "";
+    document.getElementById("aceite").checked = false;
+
     limparMensagem();
 
 });
@@ -82,58 +87,129 @@ document.getElementById("enviar").addEventListener("click", async () => {
     limparMensagem();
 
     const matricula = document.getElementById("matricula").value.trim();
+
+    const tipoDocumento = document.getElementById("tipoDocumento").value;
+
     const aceite = document.getElementById("aceite").checked;
 
+
+    // ==============================
+    // VALIDAÇÕES
+    // ==============================
+
     if (matricula === "") {
+
         mostrarMensagem("⚠️ Informe sua matrícula.", "erro");
+
         return;
     }
+
+
+    if (tipoDocumento === "") {
+
+        mostrarMensagem("⚠️ Selecione o tipo de documento.", "erro");
+
+        return;
+    }
+
 
     if (signaturePad.isEmpty()) {
+
         mostrarMensagem("⚠️ Faça sua assinatura antes de enviar.", "erro");
+
         return;
     }
 
+
     if (!aceite) {
+
         mostrarMensagem("⚠️ Você precisa confirmar a declaração.", "erro");
+
         return;
     }
+
+
+    // ==============================
+    // PREPARAR ASSINATURA
+    // ==============================
 
     const assinatura = signaturePad.toDataURL("image/png");
 
+
+    // ==============================
+    // DADOS ENVIADOS
+    // ==============================
+
     const dados = {
+
         matricula: matricula,
+
+        tipoDocumento: tipoDocumento,
+
         assinatura: assinatura
+
     };
+
+
+    // ==============================
+    // ENVIAR PARA O GOOGLE APPS SCRIPT
+    // ==============================
 
     try {
 
         const resposta = await fetch(URL_SCRIPT, {
-        method: "POST",
-        body: JSON.stringify(dados)
-    });
+
+            method: "POST",
+
+            body: JSON.stringify(dados)
+
+        });
+
 
         const resultado = await resposta.json();
 
+
+        // ==============================
+        // RESPOSTA
+        // ==============================
+
         if (resultado.status === "ok") {
 
-            mostrarMensagem("✅ Assinatura enviada com sucesso!", "sucesso");
+            mostrarMensagem(
+                "✅ Assinatura enviada com sucesso!",
+                "sucesso"
+            );
+
+
+            // Limpar formulário
 
             document.getElementById("matricula").value = "";
+
+            document.getElementById("tipoDocumento").value = "";
+
             document.getElementById("aceite").checked = false;
+
             signaturePad.clear();
+
 
         } else {
 
-            mostrarMensagem("❌ O servidor retornou um erro.", "erro");
+            mostrarMensagem(
+                "❌ O servidor retornou um erro.",
+                "erro"
+            );
 
         }
+
 
     } catch (erro) {
 
         console.error(erro);
 
-        mostrarMensagem("❌ Erro ao conectar com o servidor.", "erro");
+        mostrarMensagem(
+            "❌ Erro ao conectar com o servidor.",
+            "erro"
+        );
 
     }
 
